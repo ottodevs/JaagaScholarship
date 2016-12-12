@@ -1,0 +1,26 @@
+{
+  "name": "jaaga-scholarship-ui",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.8.3"
+  },
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "web3": "^0.17.0-beta",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "react-bootstrap": "^0.30.6",
+    "reactfire": "^1.0.0",
+    "firebase": "^3.6.1",
+    "react-mixin": "^3.0.5",
+    "react-router": "^3.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
