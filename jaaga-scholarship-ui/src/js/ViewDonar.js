@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-import {ViewDonar} from './ViewDonar';
 
-import './../../css/ViewDonar.css'
+import './../css/ViewDonar.css'
 
 export class ViewDonar extends Component {
 	constructor(props) {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-import {ViewArbiter} from './ViewArbiter';
 
-import './../../css/ViewArbiter.css'
+import './../css/ViewArbiter.css'
 
 export class ViewArbiter extends Component {
 	constructor(props) {
@@ -22,5 +21,5 @@ export class ViewArbiter extends Component {
 			<div className="ViewArbiter">ViewArbiter</div>
 		)
 	}
-
+}
 export default ViewArbiter;	

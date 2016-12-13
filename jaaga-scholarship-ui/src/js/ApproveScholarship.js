@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-import {ApproveScholarship} from './ApproveScholarship';
 
-import './../../css/ApproveScholarship.css'
+import './../css/ApproveScholarship.css'
 
 export class ApproveScholarship extends Component {
   constructor(props) {

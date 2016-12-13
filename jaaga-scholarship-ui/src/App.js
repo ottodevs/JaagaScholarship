@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import {Header} from './js/Header';
 import {ListScholars} from './js/ListScholars';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-      <ListScholars />
+      <Header/>
+      {this.props.children}
       </div>
     );
   }

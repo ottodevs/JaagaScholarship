@@ -1,0 +1,16 @@
+.ViewScholar {
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: solid;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.scholar-name {
+  font-size: 2rem;
+}
+
+.scholar-about {
+  font-size: 1rem; 
+}

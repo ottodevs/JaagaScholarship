@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import {CreateScholarship} from './CreateScholarship';
-
-import './../../css/CreateScholarship.css'
+import './../css/CreateScholarship.css'
 
 export class CreateScholarship extends Component {
 	constructor(props) {
@@ -23,4 +21,4 @@ export class CreateScholarship extends Component {
 		)
 	}
 }
-export default CreateS
+export default CreateScholarship;
