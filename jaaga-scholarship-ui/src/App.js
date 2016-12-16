@@ -5,7 +5,8 @@ import Web3 from 'web3';
 //import {solcjs} from 'solc'; 
 import {Grid, Row, Col} from 'react-bootstrap';
 
-
+var ETHEREUM_CLIENT = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
+var balance = (acct) => { return ETHEREUM_CLIENT.fromWei(ETHEREUM_CLIENT.eth.getBalance(acct),'ether').toNumber() } 
 
 class App extends Component {
   constructor(){
@@ -17,7 +18,9 @@ class App extends Component {
       arbiterBalance: undefined,
       contractBalance: undefined,
     };
-    this.addToScholarship.bind(this);
+    this.addToScholarship = this.addToScholarship.bind(this);
+    this.payOutToScholar = this.payOutToScholar.bind(this);
+    this.refundToDonar = this.refundToDonar.bind(this);
   }
 
   componentWillMount() {
@@ -74,7 +77,7 @@ class App extends Component {
     var jaggaScholarshipContract = jaagaScholarshipContractFactory.new(scholar, arbiter,{
       from:donar,
       data:bytecode,
-      gas:'4712000',
+      gas:'4712320',
       gasPrice:5}, (error, contract) => {
         if(error) {
           console.log( "error: create new contract");
@@ -92,7 +95,7 @@ class App extends Component {
               contractBalance: balance(contract.address),
             });
             console.log("the state has been set")            
-
+            console.log(this.state)
           }
         }
       });
@@ -112,6 +115,62 @@ class App extends Component {
 
   addToScholarship() {
     console.log("App.addToScholarship");
+    console.log(this.state.sholarshipContract.donar.call());
+    var componentApp = this;
+    var _contract = this.state.sholarshipContract.addToScholarship(
+      {from:componentApp.state.sholarshipContract.donar.call(),value:ETHEREUM_CLIENT.toWei(1,'ether')}, 
+      (error, contract) => { if(error) {
+          console.log( "error: create new contract");
+          console.log(error)
+        } else {
+          componentApp.setState({
+            scholarBalance: balance(componentApp.state.sholarshipContract.scholar.call()),
+            donarBalance: balance(componentApp.state.sholarshipContract.donar.call()),
+            arbiterBalance: balance(componentApp.state.sholarshipContract.arbiter.call()),
+            contractBalance:balance(componentApp.state.sholarshipContract.address)})
+        }
+      })
+  }
+
+  payOutToScholar() {
+    console.log("App.payOutToScholar");
+    console.log(this.state.sholarshipContract.donar.call());
+    var componentApp = this;
+    var _contract = this.state.sholarshipContract.payoutToScholar(
+      {from:componentApp.state.sholarshipContract.arbiter.call()}, 
+      (error, contract) => { if(error) {
+          console.log( "error: create new contract");
+          console.log(error)
+        } else {
+          componentApp.setState({
+            scholarBalance: balance(componentApp.state.sholarshipContract.scholar.call()),
+            donarBalance: balance(componentApp.state.sholarshipContract.donar.call()),
+            arbiterBalance: balance(componentApp.state.sholarshipContract.arbiter.call()),
+            contractBalance:balance(componentApp.state.sholarshipContract.address),
+
+          })
+        }
+      })
+  }
+
+  refundToDonar() {
+    console.log("App.refundToDonar");
+    console.log(this.state.sholarshipContract.arbiter.call());
+    var componentApp = this;
+    var _contract = this.state.sholarshipContract.refundToDonar(
+      {from:componentApp.state.sholarshipContract.arbiter.call()}, 
+      (error, contract) => { if(error) {
+          console.log( "error: create new contract");
+          console.log(error)
+        } else {
+          componentApp.setState({
+            scholarBalance: balance(componentApp.state.sholarshipContract.scholar.call()),
+            donarBalance: balance(componentApp.state.sholarshipContract.donar.call()),
+            arbiterBalance: balance(componentApp.state.sholarshipContract.arbiter.call()),
+            contractBalance:balance(componentApp.state.sholarshipContract.address),
+          })
+        }
+      })
   }
 
   render() {
@@ -136,7 +195,7 @@ class App extends Component {
           Balances: 
           </Row>
           <Row>
-          arbiter: {this.state.arbiterBalance}
+          Arbiter: {this.state.arbiterBalance}
           </Row>
           <Row>
           Donar: {this.state.donarBalance}
@@ -148,12 +207,14 @@ class App extends Component {
           Contract: {this.state.contractBalance}
           </Row>
           <Row>
-          <Col >
+          <Col sm={2}>
             <div className="addToScholarship" onClick={this.addToScholarship}>Add to Scholarship</div>
           </Col>
-          <Col>
+          <Col sm={2}>
+          <div className="payOutToScholar" onClick={this.payOutToScholar}>Distribute to Scholarship</div>
           </Col>
-          <Col>
+          <Col sm={2}>
+          <div className="refundToDonar" onClick={this.refundToDonar}>refund To Donar</div>
           </Col>
           </Row>
           </Grid>
