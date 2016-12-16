@@ -36,6 +36,7 @@ function sendCoin() {
 };
 
 window.onload = function() {
+  console.log("app.window.onload");
   web3.eth.getAccounts(function(err, accs) {
     if (err != null) {
       alert("There was an error fetching your accounts.");
@@ -48,6 +49,7 @@ window.onload = function() {
     }
 
     accounts = accs;
+    console.log(accs);
     account = accounts[0];
 
     refreshBalance();

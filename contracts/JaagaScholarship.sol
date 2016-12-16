@@ -4,12 +4,14 @@ contract JaagaScholarship {
   address public scholar;
   address public donar; //TODO handle multiple donars
   address public arbiter; //TODO handle multiple arbiters
+  mapping (address => uint) balances;
 
   //TODO add a struct to store some other things about a scholar
   //TODO add a struct to store some other things about a donar
 
-  function JaagaScholarship(address _scholar, address _arbiter) payable {
-    donar = msg.sender;
+  function JaagaScholarship(address _donar, address _scholar, address _arbiter) payable {
+    //donar = msg.sender;
+    donar = _donar;
     scholar = _scholar;
     arbiter = _arbiter;
   }
